@@ -55,10 +55,16 @@ main{
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: 999;
+    z-index: -999;
+    opacity: 0;
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: opacity .5s linear;
+}
+.slide:target{
+    z-index: 999;
+    opacity: 1;
 }
 .imagem-container{
     height: 90%;
