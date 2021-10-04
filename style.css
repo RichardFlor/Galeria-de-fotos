@@ -92,9 +92,11 @@ main{
     text-decoration: none;
     background-color: #c1c1c155;
     transition: all .3 linear;
+    z-index: 1;
 }
 .slide .fechar:hover{
     background-color: #FF4949;
+   
 }
 .slide .navegacao{
     position: absolute;
@@ -114,7 +116,7 @@ main{
 }
 .slide .proximo {
     right: 0;
-    height: 90%;
+    height: 100%;
 }
 
 .slide .navegacao:hover{
