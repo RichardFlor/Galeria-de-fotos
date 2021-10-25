@@ -1,17 +1,26 @@
 "use strict"
 
-const imagens = [
-    "./img/1.jpg",
-    "./img/2.jpg",
-    "./img/3.jpg",
-    "./img/4.jpg",
-    "./img/5.jpg",
-    "./img/6.jpg",
-    "./img/7.jpg",
-    "./img/8.jpg",
-    "./img/9.jpg",
-    "./img/10.jpg"
-]
+const limparElementos = (elemento) => {
+    while (elemento.firstChild){
+        elemento.removeChild(elemento.lastChild);
+    }
+};
+
+const pesquisarImagens = async (evento) => {
+    if (evento.key === 'Enter') {
+         const raca = evento.target.value ;
+        const url = `https://dog.ceo/api/breed/${raca}/images`;
+        const imagensResponse  = await fetch (url);
+        const imagens = await imagensResponse.json();
+
+         limparElementos(document.querySelector('.galeria-container'));
+         limparElementos(document.querySelector('.slide-container'));
+
+            carregarGaleria(imagens.message);
+             carregarSlide(imagens.message);
+    }
+};
+
 
 const pegarId = (url) => {
     const posBarra = url.lastIndexOf("/") + 1
@@ -65,20 +74,7 @@ const criarSlide = (urlImagem, indice, arr) => {
 const carregarSlide = (imgs) => imgs.forEach(criarSlide)
 
 
-carregarGaleria(imagens)
+// carregarGaleria(imagens)
+// carregarSlide(imagens)
 
-
-carregarSlide(imagens)
-
-{/* <div class="slide" id="9">
-<div class="imagem-container">
-    <a href="#" class="fechar">
-        &#10006;
-    </a>
-    <a href="#8" class="navegacao anterior">
-        &#171;
-    </a>
-    <img src="img/9.jpg" alt="">
-    <a href="#10" class="navegacao proximo">&#187;</a>
- </div>
-</div> */}
+document.querySelector('.pesquisa-container input').addEventListener('keypress', pesquisarImagens);
